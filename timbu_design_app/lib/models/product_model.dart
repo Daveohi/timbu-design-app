@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../cart_list.dart/product_list.dart';
 
 class ProductModel extends ChangeNotifier {
@@ -9,82 +8,124 @@ class ProductModel extends ChangeNotifier {
         images: "assets/pink.png",
         price: 500000,
         rating: 5.0,
-        // size: 'M',
-        quantity: 1),
+        quantity: 1,
+        size: 'M',
+        index: 1),
     Product(
         name: "MANCHESTER UNITED 24 HOME",
         price: 240000,
         rating: 3.5,
         images: 'assets/whitepink.png',
-        // size: 'M',
-        quantity: 1),
+        quantity: 1,
+        size: 'M',
+        index: 2),
     Product(
         name: "ITALY 24 HOME",
         price: 450000,
         rating: 4.5,
         images: 'assets/realmadrid.png',
-        // size: 'M',
-        quantity: 1),
+        quantity: 1,
+        size: 'M',
+        index: 3),
     Product(
         name: "MANCHESTER UNITED 24 HOME",
         price: 240000,
         rating: 3.5,
         images: 'assets/red.png',
-        // size: 'M',
-        quantity: 1),
+        quantity: 1,
+        size: 'M',
+        index: 4),
     Product(
         name: "SPAIN 24 AWAY JERSEY",
         price: 87000,
         rating: 4.5,
         images: 'assets/cream.png',
-        // size: 'M',
-        quantity: 1),
+        quantity: 1,
+        size: 'M',
+        index: 5),
     Product(
         name: "MERCY TRAINING JERSEY",
         price: 450000,
         rating: 4.5,
         images: 'assets/argentina.png',
-        // size: 'M',
-        quantity: 1),
+        quantity: 1,
+        size: 'M',
+        index: 6),
     Product(
         name: "FC BAYERN 24/25 HOME",
         price: 100000,
         rating: 4.5,
         images: 'assets/red-t.png',
-        // size: 'M',
-        quantity: 1),
+        quantity: 1,
+        size: 'M',
+        index: 7),
     Product(
         name: "MANCHESTER UNITED",
         price: 311000,
         rating: 4.5,
         images: 'assets/tezos-red.png',
-        // size: 'M',
-        quantity: 1),
-        Product(
+        quantity: 1,
+        size: 'M',
+        index: 8),
+    Product(
         name: "MANCHESTER UNITED",
         price: 88000,
         rating: 4.5,
         images: 'assets/tezos.png',
-        // size: 'M',
-        quantity: 1),
-        Product(
+        quantity: 1,
+        size: 'M',
+        index: 9),
+    Product(
         name: "ARSENAL JERSEY",
         price: 70000,
         rating: 4.5,
         images: 'assets/arsenal.png',
-        // size: 'M',
-        quantity: 1),
+        quantity: 1,
+        size: 'M',
+        index: 10),
+    Product(
+      images: 'assets/germany.png',
+      name: 'GERMANY 24 AWAY JERSEY',
+      price: 500000,
+      quantity: 1,
+      size: 'M',
+      rating: 4.5,
+      index: 11,
+    ),
+    Product(
+        images: 'assets/realmadrid.png',
+        name: 'REAL MADRID PRE-MATCH',
+        price: 780000,
+        quantity: 1,
+        size: 'M',
+        rating: 4.5,
+        index: 12),
+    Product(
+      images: 'assets/t.png',
+      name: 'FC BATERN 23/24 AWAY JE...',
+      price: 130000,
+      quantity: 1,
+      size: 'M',
+      rating: 4.5,
+      index: 13,
+    ),
+    Product(
+        images: 'assets/jeep.png',
+        name: 'JUVENTUS 23/24 HOME JE...',
+        price: 230000,
+        quantity: 1,
+        size: 'M',
+        rating: 4.5,
+        index: 14),
   ];
 
   List<Product> get products => _products;
 
-  final List<CartItem> items = [];
+  final List<CartItem> _items = [];
 
-  List<CartItem> get _items => items;
+  List<CartItem> get items => _items;
 
-  int get itemCount => items.length;
-
-  int get itemsTotal => items.length;
+  int get itemCount => _items.length;
 
   double get delivery => 5000;
 
@@ -96,13 +137,13 @@ class ProductModel extends ChangeNotifier {
   void addItem(Product product) {
     var existingItem = _items.firstWhere(
       (item) => item.product == product,
-      orElse: () => CartItem(product: product, quantity: 0),
+      orElse: () => CartItem(product: product),
     );
 
     if (_items.contains(existingItem)) {
-      existingItem.quantity++;
+      increaseQuantity(existingItem.product);
     } else {
-      _items.add(CartItem(product: product, quantity: 1));
+      _items.add(CartItem(product: product));
     }
 
     notifyListeners();

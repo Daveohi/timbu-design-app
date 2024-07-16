@@ -259,9 +259,17 @@ class CartPage extends StatelessWidget {
         children: [
           ListView(
             children: [
-              ...cart.items.map((item) => CartItemCard(
-                    item: item,
-                  )),
+              if (cart.items.isEmpty)
+                const Center(
+                    heightFactor: 14,
+                    child: Text(
+                      'Your cart is empty',
+                      style: TextStyle(color: Colors.black),
+                    ))
+              else
+                ...cart.items.map((item) => CartItemCard(
+                      item: item,
+                    )),
               const OrderSummary2(
                 cartItems: [],
               ),
