@@ -25,7 +25,7 @@ class OrderSummary2 extends StatelessWidget {
           const SizedBox(height: 16),
           OrderSummaryItem(
             title: 'Items',
-            value: cart.itemsTotal.toString(),
+            value: cart.itemCount.toString(),
           ),
           OrderSummaryItem(
               title: 'Delivery', value: '₦${cart.delivery.toString()}'),
